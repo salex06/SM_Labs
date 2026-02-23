@@ -50,6 +50,13 @@
             fourthModelRadio = new RadioButton();
             thirdModelRadio = new RadioButton();
             calcButton = new Button();
+            mainButtonsPanel = new TableLayoutPanel();
+            analyzeButton = new Button();
+            analyzeSettings = new TableLayoutPanel();
+            stepCountInput = new NumericUpDown();
+            startStepLabel = new Label();
+            analyzeIterLabel = new Label();
+            endStepInput = new NumericUpDown();
             stepInfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)stepSizeInput).BeginInit();
             modelPanel.SuspendLayout();
@@ -62,6 +69,10 @@
             firstModelPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)firstModelPicture).BeginInit();
             modelRadioPanel.SuspendLayout();
+            mainButtonsPanel.SuspendLayout();
+            analyzeSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)stepCountInput).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)endStepInput).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -292,25 +303,118 @@
             calcButton.Cursor = Cursors.Hand;
             calcButton.Dock = DockStyle.Fill;
             calcButton.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            calcButton.Location = new Point(5, 554);
+            calcButton.Location = new Point(3, 3);
             calcButton.Name = "calcButton";
-            calcButton.Size = new Size(1198, 86);
+            mainButtonsPanel.SetRowSpan(calcButton, 2);
+            calcButton.Size = new Size(593, 211);
             calcButton.TabIndex = 4;
-            calcButton.Text = "Вычислить";
+            calcButton.Text = "Решить систему";
             calcButton.UseVisualStyleBackColor = true;
             calcButton.Click += calcButton_Click;
+            // 
+            // mainButtonsPanel
+            // 
+            mainButtonsPanel.ColumnCount = 2;
+            mainButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            mainButtonsPanel.Controls.Add(calcButton, 0, 0);
+            mainButtonsPanel.Controls.Add(analyzeButton, 1, 0);
+            mainButtonsPanel.Controls.Add(analyzeSettings, 1, 1);
+            mainButtonsPanel.Dock = DockStyle.Bottom;
+            mainButtonsPanel.Location = new Point(5, 565);
+            mainButtonsPanel.Name = "mainButtonsPanel";
+            mainButtonsPanel.RowCount = 2;
+            mainButtonsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            mainButtonsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            mainButtonsPanel.Size = new Size(1198, 217);
+            mainButtonsPanel.TabIndex = 5;
+            // 
+            // analyzeButton
+            // 
+            analyzeButton.Cursor = Cursors.Hand;
+            analyzeButton.Dock = DockStyle.Fill;
+            analyzeButton.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            analyzeButton.Location = new Point(602, 3);
+            analyzeButton.Name = "analyzeButton";
+            analyzeButton.Size = new Size(593, 102);
+            analyzeButton.TabIndex = 5;
+            analyzeButton.Text = "Анализ производительности";
+            analyzeButton.UseVisualStyleBackColor = true;
+            analyzeButton.Click += analyzeButton_Click;
+            // 
+            // analyzeSettings
+            // 
+            analyzeSettings.ColumnCount = 2;
+            analyzeSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            analyzeSettings.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            analyzeSettings.Controls.Add(stepCountInput, 1, 1);
+            analyzeSettings.Controls.Add(startStepLabel, 0, 0);
+            analyzeSettings.Controls.Add(analyzeIterLabel, 1, 0);
+            analyzeSettings.Controls.Add(endStepInput, 0, 1);
+            analyzeSettings.Dock = DockStyle.Fill;
+            analyzeSettings.Location = new Point(602, 111);
+            analyzeSettings.Name = "analyzeSettings";
+            analyzeSettings.RowCount = 2;
+            analyzeSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            analyzeSettings.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            analyzeSettings.Size = new Size(593, 103);
+            analyzeSettings.TabIndex = 6;
+            // 
+            // stepCountInput
+            // 
+            stepCountInput.Dock = DockStyle.Fill;
+            stepCountInput.Location = new Point(299, 54);
+            stepCountInput.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            stepCountInput.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            stepCountInput.Name = "stepCountInput";
+            stepCountInput.Size = new Size(291, 31);
+            stepCountInput.TabIndex = 3;
+            stepCountInput.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            // 
+            // startStepLabel
+            // 
+            startStepLabel.Dock = DockStyle.Fill;
+            startStepLabel.Location = new Point(3, 0);
+            startStepLabel.Name = "startStepLabel";
+            startStepLabel.Size = new Size(290, 51);
+            startStepLabel.TabIndex = 0;
+            startStepLabel.Text = "Конечное значение шага интегрирования";
+            startStepLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // analyzeIterLabel
+            // 
+            analyzeIterLabel.Dock = DockStyle.Fill;
+            analyzeIterLabel.Location = new Point(299, 0);
+            analyzeIterLabel.Name = "analyzeIterLabel";
+            analyzeIterLabel.Size = new Size(291, 51);
+            analyzeIterLabel.TabIndex = 1;
+            analyzeIterLabel.Text = "Количество шагов";
+            analyzeIterLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // endStepInput
+            // 
+            endStepInput.DecimalPlaces = 4;
+            endStepInput.Dock = DockStyle.Fill;
+            endStepInput.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            endStepInput.Location = new Point(3, 54);
+            endStepInput.Maximum = new decimal(new int[] { 99999, 0, 0, 262144 });
+            endStepInput.Minimum = new decimal(new int[] { 1, 0, 0, 262144 });
+            endStepInput.Name = "endStepInput";
+            endStepInput.Size = new Size(290, 31);
+            endStepInput.TabIndex = 2;
+            endStepInput.Value = new decimal(new int[] { 1, 0, 0, 131072 });
             // 
             // Lab2
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AntiqueWhite;
-            ClientSize = new Size(1208, 645);
-            Controls.Add(calcButton);
+            ClientSize = new Size(1208, 787);
             Controls.Add(modelRadioPanel);
             Controls.Add(modelPanel);
             Controls.Add(stepInfoPanel);
             Controls.Add(label1);
+            Controls.Add(mainButtonsPanel);
             Name = "Lab2";
             Padding = new Padding(5);
             Text = "ЛР 2. МС";
@@ -326,6 +430,10 @@
             firstModelPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)firstModelPicture).EndInit();
             modelRadioPanel.ResumeLayout(false);
+            mainButtonsPanel.ResumeLayout(false);
+            analyzeSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)stepCountInput).EndInit();
+            ((System.ComponentModel.ISupportInitialize)endStepInput).EndInit();
             ResumeLayout(false);
         }
 
@@ -352,5 +460,12 @@
         private RadioButton fourthModelRadio;
         private Button calcButton;
         private CheckBox customStepCheckBox;
+        private TableLayoutPanel mainButtonsPanel;
+        private Button analyzeButton;
+        private TableLayoutPanel analyzeSettings;
+        private Label startStepLabel;
+        private Label analyzeIterLabel;
+        private NumericUpDown stepCountInput;
+        private NumericUpDown endStepInput;
     }
 }

@@ -1,5 +1,6 @@
 using SM_LAB2.models;
 using SM_LAB2.utils;
+using System.Diagnostics;
 
 
 namespace SM_LAB2
@@ -9,8 +10,8 @@ namespace SM_LAB2
     {
 
         IModel model;
-        List<IModel> availableModels = new List<IModel>() { 
-            new Model1(), 
+        List<IModel> availableModels = new List<IModel>() {
+            new Model1(),
             new Model2(),
             new Model3(),
             new Model4()
@@ -127,6 +128,39 @@ namespace SM_LAB2
             }
 
             return res;
+        }
+
+        private void analyzeButton_Click(object sender, EventArgs e)
+        {
+            List<KeyValuePair<double, int>> hAndPerformance = new();
+            List<KeyValuePair<double, double>> hAndDelta = new();
+
+            double start_h = (double)stepSizeInput.Value;
+            double end_h = (double)endStepInput.Value;
+            if (start_h >= end_h) {
+                MessageBox.Show("Начальное значение шага должно быть меньше конечного");
+                return;
+            }
+
+            int iterCount = (int)stepCountInput.Value;
+            double stepSize = (end_h - start_h) / iterCount;
+
+            double curr_h = start_h;
+
+            for (double i = 0; i < iterCount; i++) {
+                var sw = new Stopwatch();
+                sw.Start();
+                var res = CalcWithDelta(curr_h);
+                sw.Stop();
+
+                hAndPerformance.Add(KeyValuePair.Create(curr_h, sw.Elapsed.Microseconds));
+                hAndDelta.Add(KeyValuePair.Create(curr_h, res.Value));
+
+                curr_h += stepSize;
+            }
+
+            AnalyzeVisualizer av = new AnalyzeVisualizer(hAndPerformance, hAndDelta);
+            av.ShowDialog(this);
         }
     }
 }
