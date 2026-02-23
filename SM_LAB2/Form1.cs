@@ -4,8 +4,10 @@ using SM_LAB2.utils;
 
 namespace SM_LAB2
 {
+    using RungeKuttaResult = List<KeyValuePair<double, Vector>>;
     public partial class Lab2 : Form
     {
+
         IModel model;
         List<IModel> availableModels = new List<IModel>() { new Model1() };
 
@@ -33,27 +35,41 @@ namespace SM_LAB2
         private void calcButton_Click(object sender, EventArgs e)
         {
             if (model == null) model = availableModels[0];
-
             double h = (double)stepSizeInput.Value;
-            var res = calcRungeKutta(h);
+            var res = CalcWithDelta(h);
 
+            RungeKuttaResult rungeKuttaResult = res.Key;
+            double delta = res.Value;
+            if (customStepCheckBox.Checked) {
+                while (delta > 1) {
+                    h = h / 2;
+                    res = CalcWithDelta(h);
+                    rungeKuttaResult = res.Key;
+                    delta = res.Value;
+                }
+            }
 
-            
+            ResultVisualisation rf = new(rungeKuttaResult, Math.Round(delta, 2));
+            rf.ShowDialog(this);
+        }
+
+        private KeyValuePair<RungeKuttaResult, double> CalcWithDelta(double h) {
+            var res = CalcRungeKutta(h);
+
             double y0 = res[res.Count - 1].Value.Get(0);
 
             double enhanced_h = h / 2;
-            var res2 = calcRungeKutta(enhanced_h);
+            var res2 = CalcRungeKutta(enhanced_h);
             double enhanced_y0 = res2[res2.Count - 1].Value.Get(0);
 
             // онтроль точности по первой переменной состо€ни€ Y[0]
             double delta = Math.Abs((enhanced_y0 - y0) / y0) * 100;
 
-            ResultVisualisation rf = new(res, Math.Round(delta, 2));
-            rf.ShowDialog(this);
+            return KeyValuePair.Create(res, delta);
         }
 
-        private List<KeyValuePair<double, Vector>> calcRungeKutta(double h) {
-            List<KeyValuePair<double, Vector>> res = new();
+        private RungeKuttaResult CalcRungeKutta(double h) {
+            RungeKuttaResult res = new();
 
             double t_start = 0;
             double t_end = model.GetT();

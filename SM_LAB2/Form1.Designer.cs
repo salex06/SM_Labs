@@ -31,11 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Lab2));
             label1 = new Label();
             stepInfoPanel = new Panel();
+            customStepCheckBox = new CheckBox();
             stepSizeInput = new NumericUpDown();
             label2 = new Label();
             modelPanel = new Panel();
             fourthModelPanel = new Panel();
-            pictureBox1 = new PictureBox();
+            fourthModelPicture = new PictureBox();
             thirdModelPanel = new Panel();
             thirdModelPicture = new PictureBox();
             secondModelPanel = new Panel();
@@ -53,7 +54,7 @@
             ((System.ComponentModel.ISupportInitialize)stepSizeInput).BeginInit();
             modelPanel.SuspendLayout();
             fourthModelPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fourthModelPicture).BeginInit();
             thirdModelPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)thirdModelPicture).BeginInit();
             secondModelPanel.SuspendLayout();
@@ -69,31 +70,42 @@
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.Location = new Point(5, 5);
             label1.Name = "label1";
-            label1.Size = new Size(1201, 67);
+            label1.Size = new Size(1198, 67);
             label1.TabIndex = 0;
             label1.Text = "ЛР 2. Имитационная модель нелинейной динамической системы";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // stepInfoPanel
             // 
+            stepInfoPanel.Controls.Add(customStepCheckBox);
             stepInfoPanel.Controls.Add(stepSizeInput);
             stepInfoPanel.Controls.Add(label2);
             stepInfoPanel.Dock = DockStyle.Top;
             stepInfoPanel.Location = new Point(5, 72);
             stepInfoPanel.Name = "stepInfoPanel";
-            stepInfoPanel.Size = new Size(1201, 43);
+            stepInfoPanel.Size = new Size(1198, 43);
             stepInfoPanel.TabIndex = 1;
+            // 
+            // customStepCheckBox
+            // 
+            customStepCheckBox.Dock = DockStyle.Right;
+            customStepCheckBox.Location = new Point(886, 0);
+            customStepCheckBox.Name = "customStepCheckBox";
+            customStepCheckBox.Size = new Size(312, 43);
+            customStepCheckBox.TabIndex = 2;
+            customStepCheckBox.Text = "Автонастройка величины шага";
+            customStepCheckBox.UseVisualStyleBackColor = true;
             // 
             // stepSizeInput
             // 
             stepSizeInput.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             stepSizeInput.DecimalPlaces = 4;
             stepSizeInput.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            stepSizeInput.Location = new Point(601, 7);
+            stepSizeInput.Location = new Point(455, 6);
             stepSizeInput.Maximum = new decimal(new int[] { 99999, 0, 0, 262144 });
             stepSizeInput.Minimum = new decimal(new int[] { 1, 0, 0, 262144 });
             stepSizeInput.Name = "stepSizeInput";
-            stepSizeInput.Size = new Size(588, 31);
+            stepSizeInput.Size = new Size(343, 31);
             stepSizeInput.TabIndex = 1;
             stepSizeInput.Value = new decimal(new int[] { 1, 0, 0, 131072 });
             // 
@@ -104,7 +116,7 @@
             label2.Name = "label2";
             label2.Size = new Size(449, 43);
             label2.TabIndex = 0;
-            label2.Text = "Шаг интегрирования: ";
+            label2.Text = "Начальное значение шага интегрирования: ";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // modelPanel
@@ -117,12 +129,12 @@
             modelPanel.Dock = DockStyle.Top;
             modelPanel.Location = new Point(5, 115);
             modelPanel.Name = "modelPanel";
-            modelPanel.Size = new Size(1201, 380);
+            modelPanel.Size = new Size(1198, 380);
             modelPanel.TabIndex = 2;
             // 
             // fourthModelPanel
             // 
-            fourthModelPanel.Controls.Add(pictureBox1);
+            fourthModelPanel.Controls.Add(fourthModelPicture);
             fourthModelPanel.Dock = DockStyle.Left;
             fourthModelPanel.Location = new Point(900, 30);
             fourthModelPanel.Name = "fourthModelPanel";
@@ -130,16 +142,16 @@
             fourthModelPanel.Size = new Size(300, 350);
             fourthModelPanel.TabIndex = 4;
             // 
-            // pictureBox1
+            // fourthModelPicture
             // 
-            pictureBox1.BackColor = Color.White;
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(294, 344);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            fourthModelPicture.BackColor = Color.White;
+            fourthModelPicture.Dock = DockStyle.Fill;
+            fourthModelPicture.Image = (Image)resources.GetObject("fourthModelPicture.Image");
+            fourthModelPicture.Location = new Point(3, 3);
+            fourthModelPicture.Name = "fourthModelPicture";
+            fourthModelPicture.Size = new Size(294, 344);
+            fourthModelPicture.TabIndex = 0;
+            fourthModelPicture.TabStop = false;
             // 
             // thirdModelPanel
             // 
@@ -212,7 +224,7 @@
             modelTitle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             modelTitle.Location = new Point(0, 0);
             modelTitle.Name = "modelTitle";
-            modelTitle.Size = new Size(1201, 30);
+            modelTitle.Size = new Size(1198, 30);
             modelTitle.TabIndex = 0;
             modelTitle.Text = "Выбор модели";
             modelTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -250,7 +262,7 @@
             modelRadioPanel.Dock = DockStyle.Top;
             modelRadioPanel.Location = new Point(5, 495);
             modelRadioPanel.Name = "modelRadioPanel";
-            modelRadioPanel.Size = new Size(1201, 59);
+            modelRadioPanel.Size = new Size(1198, 59);
             modelRadioPanel.TabIndex = 3;
             // 
             // fourthModelRadio
@@ -280,7 +292,7 @@
             calcButton.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             calcButton.Location = new Point(5, 554);
             calcButton.Name = "calcButton";
-            calcButton.Size = new Size(1201, 86);
+            calcButton.Size = new Size(1198, 86);
             calcButton.TabIndex = 4;
             calcButton.Text = "Вычислить";
             calcButton.UseVisualStyleBackColor = true;
@@ -291,7 +303,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AntiqueWhite;
-            ClientSize = new Size(1211, 645);
+            ClientSize = new Size(1208, 645);
             Controls.Add(calcButton);
             Controls.Add(modelRadioPanel);
             Controls.Add(modelPanel);
@@ -304,7 +316,7 @@
             ((System.ComponentModel.ISupportInitialize)stepSizeInput).EndInit();
             modelPanel.ResumeLayout(false);
             fourthModelPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fourthModelPicture).EndInit();
             thirdModelPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)thirdModelPicture).EndInit();
             secondModelPanel.ResumeLayout(false);
@@ -334,8 +346,9 @@
         private PictureBox thirdModelPicture;
         private RadioButton thirdModelRadio;
         private Panel fourthModelPanel;
-        private PictureBox pictureBox1;
+        private PictureBox fourthModelPicture;
         private RadioButton fourthModelRadio;
         private Button calcButton;
+        private CheckBox customStepCheckBox;
     }
 }
