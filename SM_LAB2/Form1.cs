@@ -9,19 +9,17 @@ namespace SM_LAB2
     {
 
         IModel model;
-        List<IModel> availableModels = new List<IModel>() { new Model1() };
+        List<IModel> availableModels = new List<IModel>() { 
+            new Model1(), 
+            new Model2(),
+            new Model3(),
+            new Model4()
+        };
 
         public Lab2()
         {
             InitializeComponent();
-        }
-
-        private void secondModelRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (secondModelRadio.Checked)
-            {
-
-            }
+            model = availableModels[0];
         }
 
         private void firstModelRadio_CheckedChanged(object sender, EventArgs e)
@@ -29,6 +27,30 @@ namespace SM_LAB2
             if (firstModelRadio.Checked)
             {
                 model = availableModels[0];
+            }
+        }
+
+        private void secondModelRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (secondModelRadio.Checked)
+            {
+                model = availableModels[1];
+            }
+        }
+
+        private void thirdModelRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (thirdModelRadio.Checked)
+            {
+                model = availableModels[2];
+            }
+        }
+
+        private void fourthModelRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fourthModelRadio.Checked)
+            {
+                model = availableModels[3];
             }
         }
 
@@ -40,8 +62,10 @@ namespace SM_LAB2
 
             RungeKuttaResult rungeKuttaResult = res.Key;
             double delta = res.Value;
-            if (customStepCheckBox.Checked) {
-                while (delta > 1) {
+            if (customStepCheckBox.Checked)
+            {
+                while (delta > 1)
+                {
                     h = h / 2;
                     res = CalcWithDelta(h);
                     rungeKuttaResult = res.Key;
@@ -53,22 +77,23 @@ namespace SM_LAB2
             rf.ShowDialog(this);
         }
 
-        private KeyValuePair<RungeKuttaResult, double> CalcWithDelta(double h) {
+        private KeyValuePair<RungeKuttaResult, double> CalcWithDelta(double h)
+        {
             var res = CalcRungeKutta(h);
 
-            double y0 = res[res.Count - 1].Value.Get(0);
+            double y0 = res[res.Count - 1].Value.Get(model.GetDeltaIndicatorIndex());
 
             double enhanced_h = h / 2;
             var res2 = CalcRungeKutta(enhanced_h);
-            double enhanced_y0 = res2[res2.Count - 1].Value.Get(0);
+            double enhanced_y0 = res2[res2.Count - 1].Value.Get(model.GetDeltaIndicatorIndex());
 
-            // онтроль точности по первой переменной состо€ни€ Y[0]
             double delta = Math.Abs((enhanced_y0 - y0) / y0) * 100;
 
             return KeyValuePair.Create(res, delta);
         }
 
-        private RungeKuttaResult CalcRungeKutta(double h) {
+        private RungeKuttaResult CalcRungeKutta(double h)
+        {
             RungeKuttaResult res = new();
 
             double t_start = 0;

@@ -274,6 +274,7 @@
             fourthModelRadio.TabIndex = 3;
             fourthModelRadio.Text = "Модель 4";
             fourthModelRadio.UseVisualStyleBackColor = true;
+            fourthModelRadio.CheckedChanged += fourthModelRadio_CheckedChanged;
             // 
             // thirdModelRadio
             // 
@@ -284,6 +285,7 @@
             thirdModelRadio.TabIndex = 2;
             thirdModelRadio.Text = "Модель 3";
             thirdModelRadio.UseVisualStyleBackColor = true;
+            thirdModelRadio.CheckedChanged += thirdModelRadio_CheckedChanged;
             // 
             // calcButton
             // 

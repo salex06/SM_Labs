@@ -9,7 +9,6 @@ namespace SM_LAB2.models
 {
     interface IModel
     {
-        const double g = 9.81;
         Vector Calc(double t, Vector vars);
 
         double GetT();
@@ -17,5 +16,7 @@ namespace SM_LAB2.models
         Vector GetInitialVariableVector();
 
         int GetOrder();
+
+        int GetDeltaIndicatorIndex();
     }
 }
