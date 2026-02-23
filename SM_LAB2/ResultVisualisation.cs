@@ -25,6 +25,8 @@ namespace SM_LAB2
 
             currentVarTextBox.Text = $"x{currentVar + 1}";
             DrawChart(currentVar);
+
+            ShowFinalStateVariable(points);
         }
 
         private void DrawChart(int varIndex)
@@ -61,6 +63,14 @@ namespace SM_LAB2
             rungeKuttaChart.ChartAreas.Clear();
             rungeKuttaChart.Series.Clear();
             rungeKuttaChart.Legends.Clear();
+        }
+
+        private void ShowFinalStateVariable(List<KeyValuePair<double, Vector>> rungeKuttaResult) {
+            Vector rungeKuttaLastVector = rungeKuttaResult[rungeKuttaResult.Count - 1].Value;
+            reportTextArea.Text = $"Переменные состояния x_k(T):\n";
+            for (int i = 0; i < rungeKuttaLastVector.Size; ++i) {
+                reportTextArea.Text += $"x_{i + 1}(T) = {rungeKuttaLastVector.Get(i)}\n";
+            }
         }
 
         private void nextVarButton_Click(object sender, EventArgs e)
